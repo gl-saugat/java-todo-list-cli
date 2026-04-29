@@ -8,6 +8,10 @@ public class Task {
     private String title;
     private boolean completed = false;
 
+    public Task(String title){
+        this.title = title;
+    }
+
     public String getID(){
         return this.id;
     }
@@ -18,6 +22,10 @@ public class Task {
 
     public boolean isCompleted(){
         return this.completed;
+    }
+
+    public void markCompletion(){
+        this.completed = true;
     }
 
     @Override
