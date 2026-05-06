@@ -1,22 +1,43 @@
 package toDOList;
 
+
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.UUID;
 
 public class Process {
 
     ArrayList<Task> tasks = new ArrayList<>();
+    private Path filePath;
+
+    public Process(){
+        this.filePath = Paths.get("tasks.txt");
+        createNewFile();
+    }
+
+    private void createNewFile(){
+        try{
+            if(Files.notExists(filePath)){
+                Files.createFile(filePath);
+                System.out.println("Files created successfully");
+            }else{
+                System.out.println("Files already existed.");
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 
 
     public void addTask(String title){
-        tasks.add(new Task(title));
+        UUID uuid = UUID.randomUUID();
+        String id = uuid.toString();
+        boolean status = false;
+        tasks.add(new Task(id, title, status));
     }
 
     public List<Task> getAllTasks(){
@@ -26,7 +47,7 @@ public class Process {
     public void markTaskDone(String id) throws TaskNotFoundException{
         Task task = getTaskById(id);
         if(task == null){
-            throw new TaskNotFoundException("Task Not found by this ID! Please enter a correct one.");
+            throw new TaskNotFoundException("Task Not found.");
         }else{
             task.markCompletion();
         }
@@ -36,7 +57,7 @@ public class Process {
     public void deleteTask(String id) throws TaskNotFoundException{
         Task task = getTaskById(id);
         if(task == null){
-            throw new TaskNotFoundException("Task Not found by this ID! Please enter a correct one.");
+            throw new TaskNotFoundException("Task Not found.");
         }else{
             this.tasks.remove(task);
         }
@@ -48,8 +69,20 @@ public class Process {
     }
 
     public void saveToFile(){
+        try(BufferedWriter writer = Files.newBufferedWriter(filePath)){
+            for(Task task: tasks){
+                String toWrite = toFileString(task);
+                writer.write(toWrite);
+                writer.newLine();
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
+    }
 
+    private String toFileString(Task task){
+        return task.getID() + "|" + task.getTitle() + "|" + task.getStatus();
     }
 
 

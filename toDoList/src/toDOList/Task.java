@@ -3,13 +3,14 @@ package toDOList;
 import java.util.UUID;
 
 public class Task {
-    UUID uuid = UUID.randomUUID();
-    private String id = uuid.toString();
+    private String id;
     private String title;
-    private boolean completed = false;
+    private boolean completed;
 
-    public Task(String title){
+    public Task(String id, String title, boolean status){
+        this.id = id;
         this.title = title;
+        this.completed = status;
     }
 
     public String getID(){
@@ -22,6 +23,10 @@ public class Task {
 
     public boolean isCompleted(){
         return this.completed;
+    }
+
+    public String getStatus(){
+        return this.completed ? "Completed" : "Not Completed";
     }
 
     public void markCompletion(){

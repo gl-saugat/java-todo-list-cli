@@ -12,19 +12,6 @@ public class UserInterface {
 
     public UserInterface(Scanner scanner){
         this.scanner = scanner;
-
-        Path path = Paths.get("tasks.txt");
-
-        try{
-            if(Files.notExists(path)){
-                Files.createFile(path);
-                System.out.println("File created successfully!");
-            }else {
-                System.out.println("File already exists!");
-            }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
     }
     public void start(){
 
@@ -71,6 +58,10 @@ public class UserInterface {
                 case 5:
                     System.out.println("Thanks for using the app.");
                     return;
+
+                case 6:
+                    process.saveToFile();
+                    break;
             }
         }
 
