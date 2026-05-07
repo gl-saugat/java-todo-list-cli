@@ -61,6 +61,12 @@ public class UserInterface {
 
                 case 6:
                     process.saveToFile();
+                    System.out.println("Saved to File!");
+                    break;
+
+                case 7:
+                    process.saveFromFile();
+                    System.out.println("Tasks Retrieved.");
                     break;
             }
         }
@@ -90,31 +96,30 @@ public class UserInterface {
     }
 
     public int getMenuOption(){
-        int input = 0;
-        try {
-            do{
-                input = Integer.parseInt(scanner.nextLine());
-            }
-            while (!(input >= 1 && input <=5));
+        return getOptions(7);
 
-        }catch (Exception e){
-            System.out.println("Invalid Input. error is " + e.getMessage());
-        }
-        return input;
+
     }
 
     public int getTaskNumber(List<Task> list){
-        int input = 0;
-        try {
-            do{
-                input = Integer.parseInt(scanner.nextLine());
-            }
-            while (!(input >= 1 && input <=list.size()));
+        return getOptions(list.size());
+    }
 
-        }catch (Exception e){
-            System.out.println("Invalid Input. error is " + e.getMessage());
+    private int getOptions(int number){
+        int input = 0;
+        while(true){
+            try{
+                input = Integer.parseInt(scanner.nextLine());
+
+                if(input >=1 && input <=number){
+                    return input;
+                }else{
+                    System.out.println("Enter valid option.");
+                }
+            }catch (Exception e){
+                System.out.println("Invalid Input. error is " + e.getMessage());
+            }
         }
-        return input;
     }
 
     public List<Task> printTasks(){

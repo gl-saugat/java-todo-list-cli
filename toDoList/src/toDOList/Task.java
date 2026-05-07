@@ -26,7 +26,7 @@ public class Task {
     }
 
     public String getStatus(){
-        return this.completed ? "Completed" : "Not Completed";
+        return this.completed ? "true" : "false";
     }
 
     public void markCompletion(){

@@ -1,6 +1,7 @@
 package toDOList;
 
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -83,6 +84,35 @@ public class Process {
 
     private String toFileString(Task task){
         return task.getID() + "|" + task.getTitle() + "|" + task.getStatus();
+    }
+
+    public void saveFromFile(){
+        try(BufferedReader reader = Files.newBufferedReader(filePath)){
+            String line;
+            while((line = reader.readLine()) != null){
+                Task tmptask = fileStringToTask(line);
+                tasks.add(tmptask);
+            }
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public Task fileStringToTask(String line){
+        String[] parts = line.split("\\|", -1);
+
+        if(parts.length != 3){
+            throw new IllegalArgumentException("Not a valid task");
+        }
+
+        String id = parts[0];
+        String title = parts[1];
+        boolean status = Boolean.parseBoolean(parts[2]);
+
+        return new Task(id, title, status);
+
+
     }
 
 
