@@ -68,6 +68,10 @@ public class UserInterface {
                     process.saveFromFile();
                     System.out.println("Tasks Retrieved.");
                     break;
+
+                case 8:
+                    process.clearAllTasks();
+                    break;
             }
         }
 
@@ -96,7 +100,7 @@ public class UserInterface {
     }
 
     public int getMenuOption(){
-        return getOptions(7);
+        return getOptions(8);
 
 
     }

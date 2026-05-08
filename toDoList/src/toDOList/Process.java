@@ -115,5 +115,13 @@ public class Process {
 
     }
 
+    public void clearAllTasks(){
+        try(BufferedWriter writer = Files.newBufferedWriter(filePath)){
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 }
