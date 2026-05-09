@@ -55,23 +55,19 @@ public class UserInterface {
                     printTasks();
                     break;
 
-                case 5:
-                    System.out.println("Thanks for using the app.");
-                    return;
 
-                case 6:
+                case 5:
                     process.saveToFile();
                     System.out.println("Saved to File!");
                     break;
 
-                case 7:
-                    process.saveFromFile();
-                    System.out.println("Tasks Retrieved.");
-                    break;
-
-                case 8:
+                case 6:
                     process.clearAllTasks();
                     break;
+
+                case 7:
+                    System.out.println("Thanks for using the app.");
+                    return;
             }
         }
 
@@ -85,7 +81,9 @@ public class UserInterface {
                 2. Delete Task
                 3. Complete a Task
                 4. Show Tasks
-                5. Exit
+                5. Save to File
+                6. Clear tasks from file.
+                7. Exit
                 """);
     }
 

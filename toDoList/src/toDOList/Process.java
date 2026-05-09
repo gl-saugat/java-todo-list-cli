@@ -18,6 +18,7 @@ public class Process {
     public Process(){
         this.filePath = Paths.get("tasks.txt");
         createNewFile();
+        saveFromFile();
     }
 
     private void createNewFile(){
